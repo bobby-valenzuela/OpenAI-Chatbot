@@ -6,6 +6,24 @@ import argparse
 config = dotenv_values('.env');
 openai.api_key = config["OPENAI_API_KEY"]
 
+
+def bold(text):
+    bold_start = "\033[1m"
+    bold_end = "\033[0m"
+    return bold_start + text + bold_end
+
+def blue(text):
+    blue_start = "\033[34m"
+    blue_end = "\033[0m"
+    return blue_start + text + blue_end
+
+def red(text):
+    red_start = "\033[31m"
+    red_end = "\033[0m"
+    return red_start + text + red_end
+
+
+
 def main():
 
     parser = argparse.ArgumentParser(description="Simple command line chabot with GPT-3.5")
@@ -20,7 +38,7 @@ def main():
     while True:
 
         try:
-            usr_input = input(str("You: "))
+            usr_input = input(bold(blue(str("You: "))))
             message = { "role": "user", "content": usr_input }
             # Store our latest input into chat history
             messages.append(message)
@@ -33,7 +51,7 @@ def main():
             messages.append(response.choices[0]["message"].to_dict())
             reply = response.choices[0].message.content
 
-            print(f"Assistant: {reply}")
+            print(bold(red("Assistant: ")) + reply)
 
         except KeyboardInterrupt:
             print("Exiting...")
