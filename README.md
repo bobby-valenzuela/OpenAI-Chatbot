@@ -1,4 +1,4 @@
-# openai-chatbot
+# OpenAI-Chatbot
 
 
 # Setup
