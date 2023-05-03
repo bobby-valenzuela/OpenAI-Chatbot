@@ -21,3 +21,5 @@ The "personality" parameter is optional, but can be used to give  your chatbot c
 ```bash
 $ python3 app.py --personality "Rude and sarcastic"
 ```
+  
+![Alt text](./demo-001.gif?raw=true "Demo 1")
