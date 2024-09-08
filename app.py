@@ -28,12 +28,25 @@ def main():
 
     parser = argparse.ArgumentParser(description="Simple command line chabot with GPT-3.5")
     parser.add_argument("--personality",type=str,default="Friendly and helpful chatbot",help="A brief summary of the chatbot's personality",required=False)
-
+    parser.add_argument("--msg",type=str,default="",help="",required=False)
+    
     args = parser.parse_args()
     personality = args.personality
 
     initial_prompt = f"You are a conversational chatbot. Your personality is: {personality}"
     messages = [{"role":"system","content":initial_prompt }]
+
+    if args.msg :
+
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages= [{ "role": "user", "content": args.msg }]
+        )
+            
+        reply = response.choices[0].message.content
+        print(reply)
+        exit()
+
 
     while True:
 
