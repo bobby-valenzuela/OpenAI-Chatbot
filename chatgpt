@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Description: Optional bash script to use chatgpt in the command line passing in your prompt as the first and only argument. 
+  # Example: chatgpt "What is the capital of India?"
+
+# Can also use to get code output only and have it syntax highlighted (requires pygmentize - see https://pygments.org/download/). 
+  # Example: chatgpt --code "Write me a 'hello world' program in C"
+
+# Move this file to /usr/local/bin to run in command line as 'chatgpt' or alias in as desisred.
+
+  
+FILE_LOCATION=/home/bobby/git_repos/OpenAI-Chatbot
+
+cd $FILE_LOCATION/
+
+if [[ $1 == "--code" ]]; then
+        python3 $FILE_LOCATION/app.py --msg "$2 . Only return the code itself, do not include any explanations, delimeters, or any other text that wouldn't be part of the program itself." | pygmentize -f terminal
+else
+        python3 $FILE_LOCATION/app.py --msg "$1"
+fi
